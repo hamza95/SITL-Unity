@@ -51,6 +51,9 @@ public class udp_recieve : MonoBehaviour {
 
             Debug.Log(b);
             data = Encoding.BigEndianUnicode.GetString(b);
+
+            Debug.Log(data);
+            data = Encoding.ASCII.GetString(b);
             Debug.Log(data);
             
             //Debug.Log(data.ToString());
