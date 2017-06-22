@@ -7,12 +7,13 @@ using System.Text;
 using System.Net.Sockets;
 public class udp_recieve : MonoBehaviour {
     public UdpClient udp_client;
-    int port = 14550;
+    int port = 5503;
     string ip = "127.0.0.1";
-    int i=20;
+    int i=410;
     public byte[] b=new byte[20], s;
+    public char[] c;
     string data = "works";
-    IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Loopback, 14550);
+    IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Loopback, 5503);
     // Use this for initialization
     Socket client;
     void Start () {
@@ -44,8 +45,14 @@ public class udp_recieve : MonoBehaviour {
         try
         {
             client.Receive(b);
-            data = Encoding.ASCII.GetString(b);
+            //data=System.Text.Encoding.Default.GetString(b);
+            //data=Encoding.Default.GetString(b);
+            //Debug.Log(data);
+
+            Debug.Log(b);
+            data = Encoding.BigEndianUnicode.GetString(b);
             Debug.Log(data);
+            
             //Debug.Log(data.ToString());
             s = Encoding.ASCII.GetBytes(data);
             //Debug.Log(s);
@@ -54,6 +61,7 @@ public class udp_recieve : MonoBehaviour {
         {
             i++;
             b = new byte[i];
+            Debug.Log("catch"+i);
 
         }
 
